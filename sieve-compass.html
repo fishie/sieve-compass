@@ -3,10 +3,22 @@
   <head>
     <title>Sieve compass</title>
     <script type="module">
-
+      const button = document.getElementsByTagName("button")[0];
+      console.log(button);
+      button.addEventListener("click", () => {
+        console.log("click");
+        const div = document.getElementsByTagName("div")[0];
+        for (let i = 1; i < 10; i++) {
+          const span = document.createElement("span");
+          span.innerText = i;
+          div.appendChild(span);
+        }
+      });
     </script>
   </head>
   <body>
     <input type="text">
+    <button>Go!</button>
+    <div></div>
   </body>
 </html>
