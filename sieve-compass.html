@@ -2,11 +2,15 @@
 <html>
   <head>
     <title>Sieve compass</title>
+    <style>
+      span {
+        display: inline-block;
+        padding: 8px;
+      }
+    </style>
     <script type="module">
       const button = document.getElementsByTagName("button")[0];
-      console.log(button);
       button.addEventListener("click", () => {
-        console.log("click");
         const div = document.getElementsByTagName("div")[0];
         for (let i = 1; i < 10; i++) {
           const span = document.createElement("span");
