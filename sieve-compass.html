@@ -21,7 +21,7 @@
 
         const newDiv1 = document.createElement("div");
         mainDiv.appendChild(newDiv1);
-        for (let i = 1; i <= 20; i++) {
+        for (let i = 1; i <= 19; i++) {
           const span = document.createElement("span");
           span.innerText = i;
           newDiv1.appendChild(span);
@@ -30,18 +30,19 @@
         const newDiv2 = document.createElement("div");
         newDiv2.style = "padding-left: 15px";
         mainDiv.appendChild(newDiv2);
-        for (let i = 1; i <= 19; i++) {
+        for (let i = 1; i <= 18; i++) {
           const span = document.createElement("span");
           span.innerText = 1;
           newDiv2.appendChild(span);
         }
 
         const newDiv3 = document.createElement("div");
-        newDiv3.style = "padding-left: 30px";
+        newDiv3.style = "padding-left: 15px";
         mainDiv.appendChild(newDiv3);
-        for (let i = 1; i <= 18; i++) {
+        for (let i = 1; i <= 9; i++) {
           const span = document.createElement("span");
           span.innerText = 2;
+          span.style = "width: 60px";
           newDiv3.appendChild(span);
         }
       });
