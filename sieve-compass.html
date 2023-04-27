@@ -3,12 +3,15 @@
   <head>
     <title>Sieve compass</title>
     <style>
+      body {
+        background-color: #cccccc;
+      }
       #inputs {
         padding-bottom: 8px;
       }
       span {
         display: inline-block;
-        width: 30px;
+        width: 36px;
         text-align: center;
         height: 18px;
         font-family: monospace;
@@ -28,7 +31,7 @@
         }
 
         const newDiv2 = document.createElement("div");
-        newDiv2.style = "padding-left: 15px";
+        newDiv2.style = "padding-left: 18px";
         mainDiv.appendChild(newDiv2);
         for (let i = 1; i <= 18; i++) {
           const span = document.createElement("span");
@@ -37,13 +40,23 @@
         }
 
         const newDiv3 = document.createElement("div");
-        newDiv3.style = "padding-left: 15px";
+        newDiv3.style = "padding-left: 18px";
         mainDiv.appendChild(newDiv3);
         for (let i = 1; i <= 9; i++) {
           const span = document.createElement("span");
           span.innerText = 2;
-          span.style = "width: 60px";
+          span.style = "width: 72px";
           newDiv3.appendChild(span);
+        }
+
+        const newDiv4 = document.createElement("div");
+        newDiv4.style = "padding-left: 36px";
+        mainDiv.appendChild(newDiv4);
+        for (let i = 1; i <= 6; i++) {
+          const span = document.createElement("span");
+          span.innerText = i % 2 == 0 ? 2 : 4;
+          span.style = "width: 108px";
+          newDiv4.appendChild(span);
         }
       });
     </script>
