@@ -11,7 +11,6 @@
       }
       span {
         display: inline-block;
-        width: 36px;
         text-align: center;
         height: 18px;
         font-family: monospace;
@@ -20,44 +19,26 @@
     <script type="module">
       const button = document.getElementsByTagName("button")[0];
       button.addEventListener("click", () => {
-        const mainDiv = document.getElementById("mainDiv");
 
-        const newDiv1 = document.createElement("div");
-        mainDiv.appendChild(newDiv1);
-        for (let i = 1; i <= 19; i++) {
-          const span = document.createElement("span");
-          span.innerText = i;
-          newDiv1.appendChild(span);
+        const addRow = (leftPadding, width, limit, f) => {
+          const mainDiv = document.getElementById("mainDiv");
+          const newDiv = document.createElement("div");
+          newDiv.style = `padding-left: ${leftPadding}px`;
+          mainDiv.appendChild(newDiv);
+
+          for (let i = 1; i <= limit; i++) {
+            const span = document.createElement("span");
+            span.innerText = f(i);
+            span.style = `width: ${width}px`;
+            newDiv.appendChild(span);
+          }
         }
 
-        const newDiv2 = document.createElement("div");
-        newDiv2.style = "padding-left: 18px";
-        mainDiv.appendChild(newDiv2);
-        for (let i = 1; i <= 18; i++) {
-          const span = document.createElement("span");
-          span.innerText = 1;
-          newDiv2.appendChild(span);
-        }
-
-        const newDiv3 = document.createElement("div");
-        newDiv3.style = "padding-left: 18px";
-        mainDiv.appendChild(newDiv3);
-        for (let i = 1; i <= 9; i++) {
-          const span = document.createElement("span");
-          span.innerText = 2;
-          span.style = "width: 72px";
-          newDiv3.appendChild(span);
-        }
-
-        const newDiv4 = document.createElement("div");
-        newDiv4.style = "padding-left: 36px";
-        mainDiv.appendChild(newDiv4);
-        for (let i = 1; i <= 6; i++) {
-          const span = document.createElement("span");
-          span.innerText = i % 2 == 0 ? 2 : 4;
-          span.style = "width: 108px";
-          newDiv4.appendChild(span);
-        }
+        const k = 36;
+        addRow(0,     k,    19, i => i);
+        addRow(k / 2, k,    18, _ => 1);
+        addRow(k / 2, k * 2, 9, _ => 2);
+        addRow(k, k * 3, 6, i => i % 2 == 0 ? 2 : 4);
       });
     </script>
   </head>
