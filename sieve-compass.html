@@ -20,25 +20,29 @@
       const button = document.getElementsByTagName("button")[0];
       button.addEventListener("click", () => {
 
-        const addRow = (leftPadding, width, limit, f) => {
+        const addRow = (leftPadding, count, w, t) => {
           const mainDiv = document.getElementById("mainDiv");
           const newDiv = document.createElement("div");
           newDiv.style = `padding-left: ${leftPadding}px`;
           mainDiv.appendChild(newDiv);
 
-          for (let i = 1; i <= limit; i++) {
+          for (let i = 1; i <= count; i++) {
             const span = document.createElement("span");
-            span.innerText = f(i);
-            span.style = `width: ${width}px`;
+            span.innerText = t(i);
+            span.style = `width: ${w(i)}px`;
             newDiv.appendChild(span);
           }
-        }
+        };
 
-        const k = 36;
-        addRow(0,     k,    19, i => i);
-        addRow(k / 2, k,    18, _ => 1);
-        addRow(k / 2, k * 2, 9, _ => 2);
-        addRow(k, k * 3, 6, i => i % 2 == 0 ? 2 : 4);
+        const cycle = (pattern) => (i) => pattern[(i - 1) % pattern.length];
+        const k = 18;
+        const addDiffRow = (count, pattern) => addRow(k, count, i => k * 2 * cycle(pattern)(i), cycle(pattern));
+
+        addRow(0, 25, i => k * 2, i => i);
+        addDiffRow(24, [1]);
+        addDiffRow(12, [2]);
+        addDiffRow(8,  [4, 2]);
+        addDiffRow(6,  [6, 4, 2, 4, 2, 4, 6, 2]);
       });
     </script>
   </head>
