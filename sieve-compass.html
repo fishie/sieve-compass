@@ -22,6 +22,7 @@
     <script type="module">
       const button = document.getElementsByTagName("button")[0];
       button.addEventListener("click", () => {
+        document.getElementById("mainDiv").innerHTML = "";
 
         const addRow = (leftPadding, w, t) => {
           const mainDiv = document.getElementById("mainDiv");
