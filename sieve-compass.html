@@ -20,7 +20,7 @@
         width: max-content;
       }
     </style>
-    <script type="module">   
+    <script type="module">
       const input = document.getElementsByTagName("input")[0];
       input.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -46,8 +46,10 @@
             span.addEventListener("click", () => {
               if (span.style.textDecoration === "line-through") {
                 span.style.textDecoration = "none";
+                span.style.color = "black";
               } else {
                 span.style.textDecoration = "line-through";
+                span.style.color = "gray";
               }
             });
             newDiv.appendChild(span);
@@ -71,7 +73,7 @@
   </head>
   <body>
     <div id="inputs">
-      <input type="number">
+      <input type="number" value="1000" />
       <button>Go!</button>
     </div>
     <div id="mainDiv"></div>
