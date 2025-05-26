@@ -32,15 +32,15 @@
         const maxWidth = parseInt(input.value);
         const mainDiv = document.getElementById("mainDiv");
 
-        const addRow = (leftPadding, w, t) => {
+        const addRow = (leftPadding, getWidth, getNumber) => {
           const newDiv = document.createElement("div");
           newDiv.style = `padding-left: ${leftPadding}px`;
           mainDiv.appendChild(newDiv);
 
-          for (let i = 1, sum = w(i); sum < maxWidth; i++, sum += w(i)) {
+          for (let i = 1, width = getWidth(i); width < maxWidth; i++, width += getWidth(i)) {
             const span = document.createElement("span");
-            span.innerText = t(i);
-            span.style = `width: ${w(i)}px;`;
+            span.innerText = getNumber(i);
+            span.style = `width: ${getWidth(i)}px;`;
             span.title = `${i}`;
             span.addEventListener("click", () => {
               if (span.style.textDecoration === "line-through") {
@@ -62,12 +62,12 @@
             }
           })();
           const array = [generator.next().value];
-          const t = (i) => {
+          const getNumber = (i) => {
             if (i >= array.length) array.push(generator.next().value);
             return array[i] - array[i - 1];
           };
-          const w = (i) => k * 2 * t(i);
-          addRow(k, w, t);
+          const getWidth = (i) => k * 2 * getNumber(i);
+          addRow(k, getWidth, getNumber);
         };
 
         mainDiv.innerHTML = "";
