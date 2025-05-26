@@ -22,18 +22,17 @@
     </style>
     <script type="module">
       const input = document.getElementsByTagName("input")[0];
-      input.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          button.click();
-        }
-      });
-
       const button = document.getElementsByTagName("button")[0];
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") button.click();
+      });
       button.addEventListener("click", () => {
-        document.getElementById("mainDiv").innerHTML = "";
+        const k = 18;
+        const maxWidth = parseInt(input.value);
+        const mainDiv = document.getElementById("mainDiv");
 
         const addRow = (leftPadding, w, t) => {
-          const mainDiv = document.getElementById("mainDiv");
           const newDiv = document.createElement("div");
           newDiv.style = `padding-left: ${leftPadding}px`;
           mainDiv.appendChild(newDiv);
@@ -54,24 +53,24 @@
             });
             newDiv.appendChild(span);
           }
-        };
-
-        const k = 18;
-        const maxWidth = parseInt(input.value);
+        }; 
         const addPatternRow = (primes) => {
-          const limit = Math.ceil(maxWidth / (k * 2)) + 1;
-          const generator = function* () {
-            for (let n = 1; n < limit; n++) {
+          const generator = (function* () {
+            for (let n = 1; true; n++) {
               while (primes.map(p => n % p).some(n => n == 0)) n++;
               yield n;
             }
-          }
-          const array = Array.from(generator());
-          const t = (i) => array[i] - array[i - 1];
+          })();
+          const array = [generator.next().value];
+          const t = (i) => {
+            if (i >= array.length) array.push(generator.next().value);
+            return array[i] - array[i - 1];
+          };
           const w = (i) => k * 2 * t(i);
           addRow(k, w, t);
         };
 
+        mainDiv.innerHTML = "";
         addRow(0, i => k * 2, i => i);
         addPatternRow([]);
         addPatternRow([2]);
