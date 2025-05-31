@@ -16,28 +16,25 @@
         font-family: monospace;
         cursor: pointer;
       }
-      #mainDiv {
+      #main-div {
         width: max-content;
       }
     </style>
     <script type="module">
-      const input = document.getElementsByTagName("input")[0];
       const button = document.getElementsByTagName("button")[0];
-
-      input.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") button.click();
-      });
       button.addEventListener("click", () => {
-        const k = 18;
-        const maxWidth = parseInt(input.value);
-        const mainDiv = document.getElementById("mainDiv");
+        const width = document.getElementById("width").value;
+        const maxWidth = document.getElementById("max-width").value;
+        const mainDiv = document.getElementById("main-div");
 
         const addRow = (leftPadding, getWidth, getNumber) => {
           const newDiv = document.createElement("div");
           newDiv.style = `padding-left: ${leftPadding}px`;
           mainDiv.appendChild(newDiv);
 
-          for (let i = 1, width = getWidth(i); width < maxWidth; i++, width += getWidth(i)) {
+          let i = 1;
+          let totalWidth = getWidth(i);
+          while (totalWidth < maxWidth) {
             const span = document.createElement("span");
             span.innerText = getNumber(i);
             span.style = `width: ${getWidth(i)}px;`;
@@ -52,6 +49,8 @@
               }
             });
             newDiv.appendChild(span);
+            i++;
+            totalWidth += getWidth(i);
           }
         };
         const addPatternRow = (primes) => {
@@ -66,16 +65,17 @@
             if (i >= array.length) array.push(generator.next().value);
             return array[i] - array[i - 1];
           };
-          const getWidth = (i) => k * 2 * getNumber(i);
-          addRow(k, getWidth, getNumber);
+          const getWidth = (i) => width * 2 * getNumber(i);
+          addRow(width, getWidth, getNumber);
           return array[1];
         };
 
         mainDiv.innerHTML = "";
-        addRow(0, i => k * 2, i => i);
-        
+        addRow(0, i => width * 2, i => i);
+
         const primes = [];
-        for (let i = 0; i < 7; i++) {
+        const rows = document.getElementById("rows").value;
+        while (primes.length < rows) {
           const prime = addPatternRow(primes);
           primes.push(prime);
         }
@@ -84,9 +84,14 @@
   </head>
   <body>
     <div id="inputs">
-      <input type="number" value="1000" step="1000" />
+      <label for="max-width">Max width:</label>
+      <input type="number" value="1000" step="1000" id="max-width" />
+      <label for="width">Width:</label>
+      <input type="number" value="18" step="1" id="width" />
+      <label for="rows">Rows:</label>
+      <input type="number" value="7" step="1" id="rows" />
       <button>Go!</button>
     </div>
-    <div id="mainDiv"></div>
+    <div id="main-div"></div>
   </body>
 </html>
