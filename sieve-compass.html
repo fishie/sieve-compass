@@ -23,7 +23,7 @@
     <script type="module">
       const button = document.getElementsByTagName("button")[0];
       button.addEventListener("click", () => {
-        const width = document.getElementById("width").value;
+        const padding = document.getElementById("padding").value;
         const maxWidth = document.getElementById("max-width").value;
         const mainDiv = document.getElementById("main-div");
 
@@ -65,13 +65,13 @@
             if (i >= array.length) array.push(generator.next().value);
             return array[i] - array[i - 1];
           };
-          const getWidth = (i) => width * 2 * getNumber(i);
-          addRow(width, getWidth, getNumber);
+          const getWidth = (i) => padding * 2 * getNumber(i);
+          addRow(padding, getWidth, getNumber);
           return array[1];
         };
 
         mainDiv.innerHTML = "";
-        addRow(0, i => width * 2, i => i);
+        addRow(0, i => padding * 2, i => i);
 
         const primes = [];
         const rows = document.getElementById("rows").value;
@@ -86,8 +86,8 @@
     <div id="inputs">
       <label for="max-width">Max width:</label>
       <input type="number" value="1000" step="1000" id="max-width" />
-      <label for="width">Width:</label>
-      <input type="number" value="18" step="1" id="width" />
+      <label for="padding">Padding:</label>
+      <input type="number" value="18" step="1" id="padding" />
       <label for="rows">Rows:</label>
       <input type="number" value="7" step="1" id="rows" />
       <button>Go!</button>
